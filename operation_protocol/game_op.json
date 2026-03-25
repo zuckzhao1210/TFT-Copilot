@@ -1,8 +1,14 @@
 {
-  "game_round": 3,   
-  "operations": {                   
-    "refresh_shop": null,                
-    "buy_units": [                      
+  "game_round": 3,                      
+  "operations": {
+    "choose_HEX":{"index": 2},        
+    "rise_population":{"click_num": 2},    
+    "move_legend": {                        
+      "target_position": 12,                  
+      "path": [2,5,8,12]                      
+    },
+    "refresh_shop": true,               
+    "buy_units": [                       
       { "shop_index": 2}  
     ],
     "sell_units": [                       
@@ -22,18 +28,15 @@
       {
         "item1_id": 0,
         "item2_id": 1,
-        "target_unit": { "location": "field", "index": 5 }  
+        "target_unit": { "location": "field", "index": 5 }   
       }
     ],
-    "assign_items": [                        
+    "assign_items": [                       
       {
-        "item_id": 0,                       
+        "item_id": 0,                      
         "target_unit": { "location": "field", "index": 5 } 
       }
-    ],
-    "move_legend": {                         
-      "target_position": 12,                  
-      "path": [2,5,8,12]                       
-    }
+    ]
+
   }
 }

@@ -12,6 +12,21 @@ class GameAction:
         # 可在此加载坐标配置，例如：
         # self.coords = load_coords()  # 假设一个坐标映射字典
 
+    def choose_HEX(self, HEX_index: int):
+        """
+        选择海克斯
+        :param HEX_index: 海克斯格子索引 (0~2)
+        """
+        # 需要将 HEX_index 映射到屏幕坐标
+        # 假设有一个方法 _get_HEX_coord(HEX_index) 返回 (x, y)
+        x, y = self._get_HEX_coord(HEX_index)
+        self.mouse.click(x=x, y=y)
+
+    def rise_population(self, click_num: int):
+        """升人口：按 F 键"""
+        for i in range(click_num):
+            self.keyboard.press('f')
+
     def refresh_shop(self):
         """刷新商店：按 D 键"""
         self.keyboard.press('d')
@@ -33,12 +48,9 @@ class GameAction:
         :param index: 场上或备战区的位置索引
         """
         x, y = self._get_unit_coord(location, index)
-        self.mouse.click(x=x, y=y)  # 通常点击棋子后会出现出售按钮，还需进一步点击出售
-        # 或者可能需要右键出售？根据游戏机制，可能需要点击棋子后点击出售按钮
-        # 简化：先点击棋子，等待，再点击出售按钮（假设出售按钮坐标已知）
+        self.mouse.move_to(x=x, y=y)   
         self.mouse.wait(random_range=(0.2, 0.4))
-        sell_x, sell_y = self._get_sell_button_coord()
-        self.mouse.click(x=sell_x, y=sell_y)
+        self.keyboard.press('e')#鼠标移动到目标棋子后快捷键E
 
     def field_unit(self, from_bench_index: int, to_field_position: int):
         """
@@ -117,6 +129,12 @@ class GameAction:
             self.mouse.click(x=x, y=y)
 
     # 以下为坐标映射方法，需要根据实际游戏界面标定
+    def _get_HEX_coord(self, index: int) -> Tuple[int, int]:
+        """返回海克斯格子坐标"""
+        # 示例坐标，实际需测量
+        HEX_coords = [(100, 400), (200, 400), (300, 400)]
+        return HEX_coords[index]
+    
     def _get_shop_coord(self, index: int) -> Tuple[int, int]:
         """返回商店格子坐标"""
         # 示例坐标，实际需测量
